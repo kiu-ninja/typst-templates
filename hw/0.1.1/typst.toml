@@ -1,0 +1,7 @@
+[package]
+name = "hw"
+version = "0.1.1"
+entrypoint = "hw.typ"
+authors = ["Dimitri Tabatadze"]
+license = "MIT"
+description = "Homework template"
