@@ -3,6 +3,8 @@
 Current templates:
 
 - homework
+- PSA
+- I2CN
 
 # Installation
 
