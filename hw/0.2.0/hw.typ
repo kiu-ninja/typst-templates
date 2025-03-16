@@ -2,9 +2,22 @@
 #import "@preview/equate:0.2.1": equate
 #import "@preview/codly:1.0.0": *
 
-#let hw(body) = {
+#let header(title: none, author: none, date: none) = {
+  block(
+    width: 100%,
+    align(center, box(width: auto)[
+      = #title
+      #if author != none {author} 
+      #if author != none and date != none [\~] 
+      #if date != none {date}
+      #line(length: 100%)
+    ])
+  )
+}
+
+#let hw(title: none, author: none, date: none, body) = {
   set page(width: 18cm, height: 22cm, margin: (x: 2cm, y: 1cm), numbering: "1")
-  set text(font: "DejaVu Sans Mono", hyphenate: true)
+  set text(font: "Times New Roman", hyphenate: true)
   set par(first-line-indent: 1em, spacing: 9pt)
 
   show: thmrules.with(qed-symbol: $square$)
@@ -26,6 +39,8 @@
   }
   
   codly(zebra-fill: none, number-align: right)
+
+  header(title: title, author: author, date: date)
 
   body
 }
@@ -87,22 +102,27 @@
 
   v(1em)
   block({
-    box(
-      outset: (left: 10cm),
-      inset: (y: 6pt, x: 8pt),
-      radius: (bottom-right: 6pt),
-      stroke: black + 1pt,
-      text(fill: black, weight: "extrabold", size: 14pt)[
-        #context { counter("problem").display("1.1") }
-      ],
-    )
+    stack(
+      dir: ltr,
+      box(
+        outset: (left: 10cm),
+        inset: (y: 6pt, x: 8pt),
+        radius: (bottom-right: 6pt),
+        stroke: black + 1pt,
+        text(fill: black, weight: "extrabold", size: 14pt)[
+          #context { counter("problem").display("1.1") }
+        ],
+      ),
 
-    if title != none {
       box(
         inset: 6pt,
-        text(fill: black, weight: "extrabold", size: 14pt, title),
+        if title != none {
+          text(fill: black, weight: "extrabold", size: 14pt, title)
+        } else {
+          []
+        }
       )
-    }
+    )
   }, sticky: true)
 
   block(

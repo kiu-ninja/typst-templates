@@ -2,12 +2,23 @@
 #import "@preview/equate:0.2.1": equate
 #import "@preview/codly:1.0.0": *
 
-#let hw(body) = {
-  set page(width: 18cm, height: 22cm, margin: (x: 2cm, y: 1cm), numbering: "1")
-  set text(font: "DejaVu Sans Mono", hyphenate: true)
-  set par(first-line-indent: 1em, spacing: 9pt)
-
+#let theorems(body) = {
   show: thmrules.with(qed-symbol: $square$)
+  body
+}
+
+#let soft(body) = {
+  set page(background: rect(width: 100%, height: 100%, fill: rgb(240, 230, 220, 255)))
+  set text(fill: rgb(35, 25, 15, 255))
+
+  body
+}
+
+#let hw(body) = {
+  set par(justify: true)
+  set page(width: 18cm, height: 20cm, margin: 2cm)
+
+  show: theorems
 
   show enum: d => block(d, breakable: true)
   show list: d => block(d, breakable: true)
@@ -24,8 +35,6 @@
     )
     d
   }
-  
-  codly(zebra-fill: none, number-align: right)
 
   body
 }
@@ -86,24 +95,22 @@
   }
 
   v(1em)
-  block({
-    box(
-      outset: (left: 10cm),
-      inset: (y: 6pt, x: 8pt),
-      radius: (bottom-right: 6pt),
-      stroke: black + 1pt,
-      text(fill: black, weight: "extrabold", size: 14pt)[
-        #context { counter("problem").display("1.1") }
-      ],
-    )
+  box(
+    outset: (left: 10cm),
+    inset: (y: 6pt, x: 8pt),
+    radius: (bottom-right: 6pt),
+    stroke: black + 1pt,
+    text(fill: black, weight: "extrabold", size: 14pt)[
+      #context { counter("problem").display("1.1") }
+    ],
+  )
 
-    if title != none {
-      box(
-        inset: 6pt,
-        text(fill: black, weight: "extrabold", size: 14pt, title),
-      )
-    }
-  }, sticky: true)
+  if title != none {
+    box(
+      inset: 6pt,
+      text(fill: black, weight: "extrabold", size: 14pt, title),
+    )
+  }
 
   block(
     width: 100%,
@@ -124,21 +131,6 @@
   )
 }
 
-#let hint(body) = {
-  block(
-    width: 100%,
-    inset: 1em,
-    // radius: 6pt,
-    // stroke: black,
-    {    
-      text(fill: black, weight: "extrabold")[
-        Hint:
-      ]
-      body
-    },
-  )
-}
-
 #let note(title: "Note", body) = {
   block(
     stroke: blue,
@@ -151,7 +143,7 @@
 }
 
 // #let circle(body) = {
-//   box(stroke: black + 0.5pt, outset: (y: 4pt), inset: (x: 4pt), radius: 100%, body)
+//  box(stroke: black + 0.5pt, outset: (y: 4pt), inset: (x: 4pt), radius: 100%, body)
 // }
 
 // Math constants

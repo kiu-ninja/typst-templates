@@ -4,7 +4,7 @@
 
 #let hw(body) = {
   set page(width: 18cm, height: 22cm, margin: (x: 2cm, y: 1cm), numbering: "1")
-  set text(font: "DejaVu Sans Mono", hyphenate: true)
+  set text(font: "Times New Roman", hyphenate: true)
   set par(first-line-indent: 1em, spacing: 9pt)
 
   show: thmrules.with(qed-symbol: $square$)
@@ -87,22 +87,27 @@
 
   v(1em)
   block({
-    box(
-      outset: (left: 10cm),
-      inset: (y: 6pt, x: 8pt),
-      radius: (bottom-right: 6pt),
-      stroke: black + 1pt,
-      text(fill: black, weight: "extrabold", size: 14pt)[
-        #context { counter("problem").display("1.1") }
-      ],
-    )
+    stack(
+      dir: ltr,
+      box(
+        outset: (left: 10cm),
+        inset: (y: 6pt, x: 8pt),
+        radius: (bottom-right: 6pt),
+        stroke: black + 1pt,
+        text(fill: black, weight: "extrabold", size: 14pt)[
+          #context { counter("problem").display("1.1") }
+        ],
+      ),
 
-    if title != none {
       box(
         inset: 6pt,
-        text(fill: black, weight: "extrabold", size: 14pt, title),
+        if title != none {
+          text(fill: black, weight: "extrabold", size: 14pt, title)
+        } else {
+          []
+        }
       )
-    }
+    )
   }, sticky: true)
 
   block(
