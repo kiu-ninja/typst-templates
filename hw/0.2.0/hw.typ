@@ -17,7 +17,8 @@
 
 #let hw(title: none, author: none, date: none, body) = {
   set page(width: 18cm, height: 22cm, margin: (x: 2cm, y: 1cm), numbering: "1")
-  set text(font: "Times New Roman", hyphenate: true)
+  set text(font: "New Computer Modern", hyphenate: true)
+  show math.equation: set text(font: "New Computer Modern Math") 
   set par(first-line-indent: 1em, spacing: 9pt)
 
   show: thmrules.with(qed-symbol: $square$)
