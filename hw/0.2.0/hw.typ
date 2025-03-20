@@ -1,5 +1,5 @@
 #import "@preview/ctheorems:1.1.3": *
-#import "@preview/equate:0.2.1": equate
+#import "@preview/equate:0.3.1": equate, share-align
 #import "@preview/codly:1.0.0": *
 
 #let header(title: none, author: none, date: none) = {
@@ -54,11 +54,10 @@
   stroke: black,
 )
 #let proof = thmproof("theorem", "Proof")
-#let lemma = thmbox(
+#let lemma = thmplain(
   "theorem",
   "Lemma",
   titlefmt: d => [*_#(d)_*],
-  stroke: gray
 )
 #let proposition = thmbox(
   "theorem",
@@ -171,14 +170,5 @@
   ]
 }
 
-// #let circle(body) = {
-//   box(stroke: black + 0.5pt, outset: (y: 4pt), inset: (x: 4pt), radius: 100%, body)
-// }
+#let h(d) = text(fill: blue, d)
 
-// Math constants
-
-#let rank = math.op("rank")
-#let ext = math.op("ext")
-#let pm = $plus.minus$
-#let leftopen(a, b) = $lr(paren.l #a, #b bracket.r)$
-#let rightopen(a, b) = $lr(brakcet.l #a, #b paren.r)$
